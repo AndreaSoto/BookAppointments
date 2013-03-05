@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quote_id: 1
+  date: 2013-03-02 16:36:42
+  location: MyText
+
+two:
+  quote_id: 1
+  date: 2013-03-02 16:36:42
+  location: MyText

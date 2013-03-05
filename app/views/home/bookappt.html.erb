@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+		<h2>Quote Code:</h2>
+	</div>	
+	<div class="row">
+		<div class="span12" >
+				<div class="btn-group">
+				 <button class="btn btn-large btn-info">8am to 9am</button>
+ 				 <button class="btn btn-large btn-danger">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+</div>
+<ul>
+<% Quote.all.each do |q| %>
+	<li><%= q.name %> : <%= q.quote_number %></li>
+	<li><%= q.email %> : <%= q.cell %></li>
+<% end %>
+</ul>
+
+	<h4>FindQuote:<%= @findquote.email %></h4>
+	<h4>Quote_NumberInput:<%= @quote_number %></h4>
+
+
+<h3>Find Quote</h3>
+<%= form_for Quote.new, :url => {:controller => 'home', :action => 'bookappt'} do |f| -%>
+	<%= f.label :quote_number %>
+	<%= f.text_field :quote_number %>
+	<p>
+		<%= f.submit 'Find Quote', :class => "btn" %>
+	</p>
+<% end -%>
+
+
