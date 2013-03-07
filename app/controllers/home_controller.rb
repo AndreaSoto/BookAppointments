@@ -45,7 +45,8 @@ class HomeController < ApplicationController
 
 		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
-		  :from => "Deck Hunters <deckhunters@byrobots.com>",
+		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
+		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
 		  :subject => "Meeting Request: A001",
 		  :text => "Do you wish to confirm meeting request March 8, 2013 at 8:00am? http://OQS.heroku.com/home/confirm_client_meeting?code=A001"
@@ -56,7 +57,8 @@ class HomeController < ApplicationController
 	def confirm_client_meeting
 		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
-		  :from => "Deck Hunters <deckhunters@byrobots.com>",
+		  #:from => "OQS <deckhunters@byrobots.com>",
+		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
 		  :subject => "Meeting Request: A001 - Accepted",
 		  :text => "Thanks for contacting us!  "
