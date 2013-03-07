@@ -1,14 +1,26 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
-
+gem 'icalendar'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
+group :development do
+	gem 'sqlite3'
+end
+
+group :production do
+	gem 'pg'
+end
+
+
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem  'mail'
+gem "actionmailer"
+gem 'rest-client'
 
 
 # Gems used only for assets and not required

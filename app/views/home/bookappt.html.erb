@@ -1,9 +1,46 @@
 <div class="container">
 	<div class="row">
-		<h2>Quote Code:</h2>
+	<h3>Quote Code </h3>
+	<%= form_for Quote.new, :url => {:controller => 'home', :action => 'bookappt'} do |f| -%>
+	<%= f.text_field :quote_number %>
+	
+
 	</div>	
 	<div class="row">
-		<div class="span12" >
+		<div class="span12" ><h4><%= Date.today + 1 %></h4>
+				<div class="btn-group">
+				 <%= f.submit '8am to 9am', :class => "btn btn-large btn-info" %>	
+ 				 <button class="btn btn-large btn-danger">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 2 %></h4>
+				<div class="btn-group">
+				 <button class="btn btn-large btn-info">8am to 9am</button>
+ 				 <button class="btn btn-large btn-info">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 3 %></h4>
+				<div class="btn-group">
+				 <button class="btn btn-large btn-info">8am to 9am</button>
+ 				 <button class="btn btn-large btn-info">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 4 %></h4>
 				<div class="btn-group">
 				 <button class="btn btn-large btn-info">8am to 9am</button>
  				 <button class="btn btn-large btn-danger">9am to 10am</button>
@@ -13,25 +50,46 @@
 				</div>
 		</div>
 	</div>
-</div>
-<ul>
-<% Quote.all.each do |q| %>
-	<li><%= q.name %> : <%= q.quote_number %></li>
-	<li><%= q.email %> : <%= q.cell %></li>
-<% end %>
-</ul>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 5 %></h4>
+				<div class="btn-group">
+				 <button class="btn btn-large btn-danger">8am to 9am</button>
+ 				 <button class="btn btn-large btn-danger">9am to 10am</button>
+ 				 <button class="btn btn-large btn-danger">10am to 11am</button>
+ 				 <button class="btn btn-large btn-danger">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 6 %></h4>
+				<div class="btn-group">
+				 <button class="btn btn-large btn-info">8am to 9am</button>
+ 				 <button class="btn btn-large btn-info">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12" ><h4><%= Date.today + 7 %></h4>
+				<div class="btn-group">
+				 <button class="btn btn-large btn-info">8am to 9am</button>
+ 				 <button class="btn btn-large btn-danger">9am to 10am</button>
+ 				 <button class="btn btn-large btn-info">10am to 11am</button>
+ 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
+ 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
+				</div>
+		</div>
+	</div>
 
-	<h4>FindQuote:<%= @findquote.email %></h4>
-	<h4>Quote_NumberInput:<%= @quote_number %></h4>
-
-
-<h3>Find Quote</h3>
-<%= form_for Quote.new, :url => {:controller => 'home', :action => 'bookappt'} do |f| -%>
-	<%= f.label :quote_number %>
-	<%= f.text_field :quote_number %>
-	<p>
-		<%= f.submit 'Find Quote', :class => "btn" %>
-	</p>
 <% end -%>
+</div><!-- container -->
+
+
+
+
+
 
 

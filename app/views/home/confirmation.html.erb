@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="span12" >
+			<div class="hero-unit">
+			  <h1>Confirmation</h1>
+			  <p>An appointment is going to be booked for selected date, Do you want to continue?</p>
+			  <p>
+			  	<%= form_for Appointment.new, :url => {:controller => 'home', :action => 'email_send_meeting_confirmation'} do |f| -%>
+					<%= f.label :Address %>
+					<%= f.text_field :location %>
+					<%= f.label :"March 8, 2013 8:00am" %>
+
+					<%= f.submit 'Confirm', :class => "btn btn-primary btn-large" %>
+				<% end -%>
+
+			  </p>
+			</div>
+		</div>
+	</div>
+</div>

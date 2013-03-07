@@ -34,4 +34,18 @@ Bookappointment::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_charset = "utf-8"
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+       :authentication => :plain,
+       :address => "smtp.mailgun.org",
+       :port => 587,
+       :domain => "app2743556.mailgun.org",
+       :user_name => "postmaster@app2743556.mailgun.org",
+       :password => "9i2zdvptjyh7"
+     }
+
 end
