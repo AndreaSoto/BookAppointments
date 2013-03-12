@@ -43,8 +43,7 @@ class HomeController < ApplicationController
 
 	def email_send_meeting_confirmation
 
-		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
-		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
+		RestClient.post "THIS INFORMATION IS PRIVATE github",
 		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
@@ -55,8 +54,7 @@ class HomeController < ApplicationController
 	end
 
 	def confirm_client_meeting
-		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
-		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
+		RestClient.post "THIS INFORMATION IS PRIVATE github",
 		  #:from => "OQS <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
@@ -68,7 +66,7 @@ class HomeController < ApplicationController
 	end
 
 	def icalendar_generator
-		#single events
+		#multiple events test
 		cal = Icalendar::Calendar.new
 		cal.event do
 		  dtstart       Date.new(2013, 03, 29)

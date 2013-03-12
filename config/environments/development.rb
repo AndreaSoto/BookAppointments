@@ -43,9 +43,9 @@ Bookappointment::Application.configure do
        :authentication => :plain,
        :address => "smtp.mailgun.org",
        :port => 587,
-       :domain => "app2743556.mailgun.org",
-       :user_name => "postmaster@app2743556.mailgun.org",
-       :password => "9i2zdvptjyh7"
+       :domain => "private.mailgun.org",
+       :user_name => "yourusername",
+       :password => "password"
      }
 
 end
