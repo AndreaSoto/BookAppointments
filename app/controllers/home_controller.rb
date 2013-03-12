@@ -43,7 +43,8 @@ class HomeController < ApplicationController
 
 	def email_send_meeting_confirmation
 
-		RestClient.post "THIS INFORMATION IS PRIVATE github",
+		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
+		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
@@ -54,7 +55,8 @@ class HomeController < ApplicationController
 	end
 
 	def confirm_client_meeting
-		RestClient.post "THIS INFORMATION IS PRIVATE github",
+		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
+		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "OQS <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
