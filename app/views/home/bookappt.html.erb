@@ -8,11 +8,11 @@
     <p>showing appoints</p>
     <p><%= Appointment.all %></p>
 
-	<%= form_for Appointment.new, :url => {:controller => 'home', :action => 'confirmApptRequest'} do |f| -%>
+	<%= form_for Appointment.new, :url => {:controller => 'home', :action => 'confirm_appointment'} do |f| -%>
 	<%= f.label :address %>
 	<%= f.text_field :location %>
 
-	<%= f.hidden_field :date, :value => Date.new(2013, 03, 29) %>
+	<%= f.hidden_field :quote_id, :value => @findquote.id %>
 	</div>	
 
 	<!-- Available times per day loop-->
@@ -23,12 +23,12 @@
 				<h4><%= Date.today + i %></h4>
 				<div class="btn-group">
 				
-					<% ([8,9,10,6,7]).each do |j| %>
+					<% (@times).each do |j, k| %>
 						<% @time = Appointment.find_by_day_and_time(Date.today + i, j) %>
-						<% if (@time != nil)  %>
-						 	<button class="btn btn-large btn-info">open <%= j %></button>
+						<% if (@time == nil)  %>
+							<%= f.submit k.to_s, :class => 'btn btn-large btn-info', :name => (Date.today+i).to_s + '__' + j.to_s  %>
 						<% else %>
-							<button class="btn btn-large btn-danger">open <%= j %></button>
+							<button class="btn btn-large btn-danger"><%= k.to_s %></button>
 						<% end %>
 					<% end %>
 

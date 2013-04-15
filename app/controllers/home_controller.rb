@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+
+
 	def index
 	end 
 
@@ -6,6 +8,7 @@ class HomeController < ApplicationController
 	#param: Quote Number
 	#shows available times
 	def bookappt
+		@times = times
 		if params[:quote]
 			@quote_number = params[:quote]['quote_number']
 			@findquote = Quote.find_by_quote_number(params[:quote]['quote_number'])
@@ -14,10 +17,35 @@ class HomeController < ApplicationController
 				redirect_to :action => 'index'
 			end
 		end
+
 	end
 
-	def confirmApptRequest
+	def confirm_appointment
 
+		ap = Appointment.new
+		ap.quote = Quote.find_by_id(params[:appointment]["quote_id"])
+
+		# hacky way to find the index I need.
+		datetime = ""
+		(times).each do |i, j|
+			#logger.debug i
+			if (params.index(j) != nil)
+				datetime = params.index(j)
+			end
+		end
+
+		#at this point datetime has the correct value, we just need to split it.
+		datetime = datetime.split(/__/)
+
+		ap.day = datetime[0]
+		ap.time = datetime[1]
+		ap.location = params[:appointment]["location"]
+		ap.save
+
+		redirect_to :action => 'index' #if a.save
+
+		#@times = times
+		#render :text => params
 	end
 
 
@@ -25,7 +53,7 @@ class HomeController < ApplicationController
 
 	def email_send_meeting_confirmation
 
-		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
+		RestClient.post "https://api:"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
@@ -37,7 +65,7 @@ class HomeController < ApplicationController
 	end
 
 	def confirm_client_meeting
-		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
+		RestClient.post "https://api:"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "OQS <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
@@ -109,6 +137,19 @@ class HomeController < ApplicationController
 			#		<h4>Quote_NumberInput:<%= @quote_number %></h4>
 
 		end
+	end
+
+
+	private 
+
+	def times
+		times = {}
+		times["8"] = "8am to 9pm"
+		times["9"] = "9am to 9pm"
+		times["10"] = "10am to 9pm"
+		times["6"] = "6am to 9pm"
+		times["7"] = "7am to 9pm"
+		return times
 	end
 
 end
