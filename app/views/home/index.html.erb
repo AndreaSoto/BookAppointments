@@ -1,28 +1,32 @@
 <div class="container">
 	<div class="row">
-		<div class="span12" >
-			<div class="hero-unit">
-			  <h1>Request a Quote</h1>
-			  <p>Looking for drywall cost? Price of hanging and taping drywall - Basements, new homes etc..</p>
-			  <p>
-			    <a class="btn btn-primary btn-large">
-			      Learn more
-			    </a>
-			  </p>
-			</div>
-		</div>
+
 	</div>
 	<div class="row">
-		<div class="span12" >
+		<div class="span6" >
 			<div class="hero-unit">
-			  <h1>Book an Appointment</h1>
-			  <p>Ready for next step? Book a follow-up meeting with El Sol Contruction. Quote Code is required.</p>
+			  <h2>Request a Quote</h2>
+			  <p>Looking for drywall cost? Price of hanging and taping drywall - Basements, new homes etc..</p>
 			  <p>
-			    <a class="btn btn-primary btn-large" href="/home/bookappt">
+			    <a class="btn btn-primary btn-large" href="/quote/create">
 			      Learn more
 			    </a>
 			  </p>
 			</div>
 		</div>
+		<div class="span6" >
+			<div class="hero-unit">
+			  <h2>Book an Appointment</h2>
+			  <p>Ready for next step? Book a follow-up meeting with El Sol Contruction. Quote Number is required.</p>
+			  <%= form_for Quote.new, :url => {:controller => 'home', :action => 'bookappt'} do |f| -%>
+				<%= f.label :quote_number %>
+				<%= f.text_field :quote_number %>
+			  <p>
+			    <%= f.submit 'Learn more', :class => "btn btn-primary btn-large" %>
+			    <% end -%>
+			  </p>
+			</div>
+		</div>
+
 	</div>
 </div>

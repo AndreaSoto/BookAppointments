@@ -1,43 +1,25 @@
 class HomeController < ApplicationController
-	def index 
-		
+	def index
 	end 
 
+	#bookappt 
+	#param: Quote Number
+	#shows available times
 	def bookappt
-		#@new_appt = Appointment.new
-		#@new_quote = Quote.new
-		#@quote = 
-		#@findquote = Quote.new
-		#@result = Quote.where("quote_number = ?",params[:quote_number])
-		#@result.save
 		if params[:quote]
-			#@findquote = Quote.find(:all, :conditions => ['quote_number LIKE', "%#{params[:quote_number]}%"])
 			@quote_number = params[:quote]['quote_number']
-			#@findquote = Quote.find(:all, :conditions => ['quote_number LIKE', "%#{params[:quote]}%"])
-			#@findquote = Quote.where("quote_number = ?", params[:quote]).first
-			#@findquote = Quote.find(:conditions => {:quote_number => params[:quote]['quote_number']})
 			@findquote = Quote.find_by_quote_number(params[:quote]['quote_number'])
-
-			#we verify code then we send email
-			redirect_to :action => 'confirmation'
-		else
-			#@findquote = " No quote found"
-			#@quote_number = " No quote number"
-			#html part
-			#				<p>
-			#		<h4>Debugging information:</h4>
-			#	<ul>
-			#	<% Quote.all.each do |q| %>
-			#		<li><%= q.name %> : <%= q.quote_number %></li>
-			#		<li><%= q.email %> : <%= q.cell %></li>
-			#	<% end %>
-			#	</ul>
-			#
-			#		<h4>Quote Code Found:<%= @findquote.email %></h4>
-			#		<h4>Quote_NumberInput:<%= @quote_number %></h4>
-
+			@all = Quote.all
+			if !@findquote
+				redirect_to :action => 'index'
+			end
 		end
 	end
+
+	def confirmApptRequest
+
+	end
+
 
 	
 
@@ -92,4 +74,41 @@ class HomeController < ApplicationController
 		render :text => cal.to_ical
 
 	end
+
+	def bookappt_before
+		#@new_appt = Appointment.new
+		#@new_quote = Quote.new
+		#@quote = 
+		#@findquote = Quote.new
+		#@result = Quote.where("quote_number = ?",params[:quote_number])
+		#@result.save
+		if params[:quote]
+			#@findquote = Quote.find(:all, :conditions => ['quote_number LIKE', "%#{params[:quote_number]}%"])
+			@quote_number = params[:quote]['quote_number']
+			#@findquote = Quote.find(:all, :conditions => ['quote_number LIKE', "%#{params[:quote]}%"])
+			#@findquote = Quote.where("quote_number = ?", params[:quote]).first
+			#@findquote = Quote.find(:conditions => {:quote_number => params[:quote]['quote_number']})
+			@findquote = Quote.find_by_quote_number(params[:quote]['quote_number'])
+
+			#we verify code then we send email
+			redirect_to :action => 'confirmation'
+		else
+			#@findquote = " No quote found"
+			#@quote_number = " No quote number"
+			#html part
+			#				<p>
+			#		<h4>Debugging information:</h4>
+			#	<ul>
+			#	<% Quote.all.each do |q| %>
+			#		<li><%= q.name %> : <%= q.quote_number %></li>
+			#		<li><%= q.email %> : <%= q.cell %></li>
+			#	<% end %>
+			#	</ul>
+			#
+			#		<h4>Quote Code Found:<%= @findquote.email %></h4>
+			#		<h4>Quote_NumberInput:<%= @quote_number %></h4>
+
+		end
+	end
+
 end

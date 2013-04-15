@@ -1,88 +1,47 @@
 <div class="container">
 	<div class="row">
-	<h3>Quote Code </h3>
-	<%= form_for Quote.new, :url => {:controller => 'home', :action => 'bookappt'} do |f| -%>
-	<%= f.text_field :quote_number %>
-	
+	<h3>Quote Number </h3>
+    Quote number sent:<%= @quote_number %><br/>
+    found? <%= @findquote.quote_number %><br/>
+    all: <%= @all %> <br/>
 
+    <p>showing appoints</p>
+    <p><%= Appointment.all %></p>
+
+	<%= form_for Appointment.new, :url => {:controller => 'home', :action => 'confirmApptRequest'} do |f| -%>
+	<%= f.label :address %>
+	<%= f.text_field :location %>
+
+	<%= f.hidden_field :date, :value => Date.new(2013, 03, 29) %>
 	</div>	
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 1 %></h4>
+
+	<!-- Available times per day loop-->
+	<% (0..5).each do |i| %>
+
+			<div class="row">
+			<div class="span12" >
+				<h4><%= Date.today + i %></h4>
 				<div class="btn-group">
-				 <%= f.submit '8am to 9am', :class => "btn btn-large btn-info" %>	
- 				 <button class="btn btn-large btn-danger">9am to 10am</button>
+				
+					<% ([8,9,10,6,7]).each do |j| %>
+						<% @time = Appointment.find_by_day_and_time(Date.today + i, j) %>
+						<% if (@time != nil)  %>
+						 	<button class="btn btn-large btn-info">open <%= j %></button>
+						<% else %>
+							<button class="btn btn-large btn-danger">open <%= j %></button>
+						<% end %>
+					<% end %>
+
+<!--  				 <button class="btn btn-large btn-danger">9am to 10am</button>
  				 <button class="btn btn-large btn-info">10am to 11am</button>
  				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
+ 				 <button class="btn btn-large btn-danger">7pm to 8pm</button> -->
 				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 2 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-info">8am to 9am</button>
- 				 <button class="btn btn-large btn-info">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 3 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-info">8am to 9am</button>
- 				 <button class="btn btn-large btn-info">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 4 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-info">8am to 9am</button>
- 				 <button class="btn btn-large btn-danger">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 5 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-danger">8am to 9am</button>
- 				 <button class="btn btn-large btn-danger">9am to 10am</button>
- 				 <button class="btn btn-large btn-danger">10am to 11am</button>
- 				 <button class="btn btn-large btn-danger">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 6 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-info">8am to 9am</button>
- 				 <button class="btn btn-large btn-info">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-info">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12" ><h4><%= Date.today + 7 %></h4>
-				<div class="btn-group">
-				 <button class="btn btn-large btn-info">8am to 9am</button>
- 				 <button class="btn btn-large btn-danger">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-danger">7pm to 8pm</button>
-				</div>
-		</div>
-	</div>
+			</div>
+			</div>
+			
+	<% end %>
+	
 
 <% end -%>
 </div><!-- container -->
