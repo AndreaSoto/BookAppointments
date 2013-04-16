@@ -1,47 +1,44 @@
 <div class="container">
-	<div class="row">
-	<h3>Quote Number </h3>
-    Quote number sent:<%= @quote_number %><br/>
-    found? <%= @findquote.quote_number %><br/>
-    all: <%= @all %> <br/>
+	<h3>Booking an appointment for quote: <%= @quote_number %></h3>
 
-    <p>showing appoints</p>
-    <p><%= Appointment.all %></p>
+	<%= form_for Appointment.new, :html => {:class => 'form-horizontal'}, :url => {:controller => 'home', :action => 'confirm_appointment'} do |f| -%>
 
-	<%= form_for Appointment.new, :url => {:controller => 'home', :action => 'confirm_appointment'} do |f| -%>
-	<%= f.label :address %>
-	<%= f.text_field :location %>
+	<div class="control-group">
+	    <label class="control-label" for="inputEmail">Address</label>
+	    <div class="controls">
+      		<%= f.text_field :location %>
+    	</div>
+  	</div>
+	
 
 	<%= f.hidden_field :quote_id, :value => @findquote.id %>
-	</div>	
 
-	<!-- Available times per day loop-->
-	<% (0..5).each do |i| %>
+	<div class="control-group">
+		<label class="control-label" for="">Select a Time</label>
+		<div class="controls">
 
-			<div class="row">
-			<div class="span12" >
-				<h4><%= Date.today + i %></h4>
-				<div class="btn-group">
-				
-					<% (@times).each do |j, k| %>
-						<% @time = Appointment.find_by_day_and_time(Date.today + i, j) %>
-						<% if (@time == nil)  %>
-							<%= f.submit k.to_s, :class => 'btn btn-large btn-info', :name => (Date.today+i).to_s + '__' + j.to_s  %>
-						<% else %>
-							<button class="btn btn-large btn-danger"><%= k.to_s %></button>
-						<% end %>
-					<% end %>
 
-<!--  				 <button class="btn btn-large btn-danger">9am to 10am</button>
- 				 <button class="btn btn-large btn-info">10am to 11am</button>
- 				 <button class="btn btn-large btn-info">6pm to 7pm</button>
- 				 <button class="btn btn-large btn-danger">7pm to 8pm</button> -->
+			<% (0..5).each do |i| %>	
+				<div class="row">
+					<div class="span12">
+						<strong><%= Date.today + i %></strong>
+						<div class="btn-group">
+						
+							<% (@times).each do |j, k| %>
+								<% @time = Appointment.find_by_day_and_time(Date.today + i, j) %>
+								<% if (@time == nil)  %>
+									<%= f.submit k.to_s, :class => 'btn btn-medium btn-info', :name => (Date.today+i).to_s + '__' + j.to_s  %>
+								<% else %>
+									<button class="btn btn-medium btn-danger" onclick="javascript: return false;"><%= k.to_s %></button>
+								<% end %>
+							<% end %>
+						</div>
+					</div>
 				</div>
-			</div>
-			</div>
-			
-	<% end %>
-	
+			<% end %>
+
+		</div>
+	</div>	
 
 <% end -%>
 </div><!-- container -->

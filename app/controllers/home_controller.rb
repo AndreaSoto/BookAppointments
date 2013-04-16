@@ -17,7 +17,6 @@ class HomeController < ApplicationController
 				redirect_to :action => 'index'
 			end
 		end
-
 	end
 
 	def confirm_appointment
@@ -53,7 +52,7 @@ class HomeController < ApplicationController
 
 	def email_send_meeting_confirmation
 
-		RestClient.post "https://api:"\
+		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
@@ -65,7 +64,7 @@ class HomeController < ApplicationController
 	end
 
 	def confirm_client_meeting
-		RestClient.post "https://api:"\
+		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
 		  #:from => "OQS <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",

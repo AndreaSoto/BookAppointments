@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415013400) do
+ActiveRecord::Schema.define(:version => 20130416032459) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "quote_id"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(:version => 20130415013400) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "quote_number"
+    t.integer  "h_feet"
+    t.integer  "h_inches"
+    t.integer  "l_feet"
+    t.integer  "l_inches"
+    t.integer  "w_feet"
+    t.integer  "w_inches"
+    t.integer  "ceiling"
+    t.integer  "insulated"
+    t.integer  "panel"
   end
 
 end

@@ -24,16 +24,48 @@
   	<h3>Drywall details</h3>
 
   	<div class="control-group">
-	    <label class="control-label" for="inputEmail">Coverage Area</label>
+	    <label class="control-label" for="inputEmail">Height</label>
 	    <div class="controls">
-      		<%= f.text_field :cell %>
+      		<%= f.text_field :h_feet, :placeholder => 'feet', :class => 'input-mini'  %>
+          <%= f.text_field :h_inches, :placeholder => 'inches', :class => 'input-mini' %>
     	</div>
   	</div>
 
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Width</label>
+      <div class="controls">
+          <%= f.text_field :w_feet, :placeholder => 'feet', :class => 'input-mini' %>
+          <%= f.text_field :w_inches, :placeholder => 'inches', :class => 'input-mini' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Length</label>
+      <div class="controls">
+          <%= f.text_field :l_feet, :placeholder => 'feet', :class => 'input-mini' %>
+          <%= f.text_field :l_inches, :placeholder => 'inches', :class => 'input-mini' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Length</label>
+      <div class="controls">
+
+        <%= f.label :ceiling, 'asdasd' do %>
+          <%= f.check_box :ceiling, :class => 'input-mini' %> This room has a drywall ceiling
+        <% end %>
+
+        <%= f.label :insulated, 'asdasd' do %>
+          <%= f.check_box :insulated, :class => 'input-mini' %> Room is insulated.
+        <% end %>
+
+      </div>
+    </div>
+
   	<div class="control-group">
-	    <label class="control-label" for="inputEmail">Panel Size</label>
+	    <label class="control-label" for="inputEmail">What length sheet do you want to use to calculate your totals?</label>
 	    <div class="controls">
-      		<%= f.select(:cell, options_for_select([['4x5', '4x5'], ['teasd', '2x5'], ['teasd', '5x6']], :selected => '2x5')) %>
+      		<%= f.select(:panel, options_for_select([['8 feet long sheet', '8'], ['10 feet long sheet', '10'], ['12 feet long sheet', '12']], :selected => '8')) %>
     	</div>
   	</div>
 
