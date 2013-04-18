@@ -76,7 +76,7 @@ class HomeController < ApplicationController
 		  :subject => "Meeting Request Accepted: ".concat(quote.quote_number),
 		  :text => "Thanks for contacting us!  The meeting was confirmed."
 
-		render :text => "Email sent to client. Please check your calendar" #, :layout => true
+		render :text => "<h3>Email sent to client. Please check your calendar</h3>" #, :layout => true
 		#redirect_to :action => 'icalendar_generator'
 	end
 
