@@ -14,7 +14,8 @@ class HomeController < ApplicationController
 			@findquote = Quote.find_by_quote_number(params[:quote]['quote_number'])
 			@all = Quote.all
 			if !@findquote
-				redirect_to :action => 'index'
+				flash[:error] = "Quote number not found or already used."
+				redirect_to root_url
 			end
 		end
 	end
@@ -41,36 +42,39 @@ class HomeController < ApplicationController
 		ap.location = params[:appointment]["location"]
 		ap.save
 
-		redirect_to :action => 'index' #if a.save
-
-		#@times = times
-		#render :text => params
-	end
-
-
-	
-
-	def email_send_meeting_confirmation
-
 		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
-		  #:from => "Deck Hunters <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
 		  :to => "andreasoto@gmail.com",
-		  :subject => "Meeting Request: A001",
-		  :text => "Do you wish to confirm meeting request March 8, 2013 at 8:00am? http://OQS.heroku.com/home/confirm_client_meeting?code=A001"
+		  :subject => "Meeting Request: ".concat(ap.quote.quote_number),
+		  :text => "Do you wish to confirm meeting request ".concat(datetime[0].to_s).concat(" at ").concat(datetime[1].to_s).concat("? http://OQS.heroku.com/home/confirm_client_meeting?code=").concat(ap.quote.quote_number)
 
-		render :text => "Email sent to El Sol Construciton for confirmation" #, :layout => true
+		flash[:notice] = "Appointment successfuly created. Please wait for an email confirmation."
+
+		redirect_to root_url #if a.save
+
 	end
+
+	# def email_send_meeting_confirmation
+	# 	quote = Quote.find_by_quote_number(params[:code])
+	# 	RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
+	# 	  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
+	# 	  :from => "OQS <andreasoto@gmail.com>",
+	# 	  :to => "andreasoto@gmail.com",
+	# 	  :subject => "Meeting Request: ".concat(quote.quote_number),
+	# 	  :text => "Do you wish to confirm meeting request March 8, 2013 at 8:00am? http://OQS.heroku.com/home/confirm_client_meeting?code=".concat(quote.quote_number)
+
+	# 	render :text => "Email sent to El Sol Construciton for confirmation" #, :layout => true
+	# end
 
 	def confirm_client_meeting
+		quote = Quote.find_by_quote_number(params[:code])
 		RestClient.post "https://api:key-857bcl2hvwsj340zb-ov9h2xd4cfj9e3"\
 		  "@api.mailgun.net/v2/app2743556.mailgun.org/messages",
-		  #:from => "OQS <deckhunters@byrobots.com>",
 		  :from => "OQS <andreasoto@gmail.com>",
-		  :to => "andreasoto@gmail.com",
-		  :subject => "Meeting Request: A001 - Accepted",
-		  :text => "Thanks for contacting us!  "
+		  :to => quote.email,
+		  :subject => "Meeting Request Accepted: ".concat(quote.quote_number),
+		  :text => "Thanks for contacting us!  The meeting was confirmed."
 
 		render :text => "Email sent to client. Please check your calendar" #, :layout => true
 		#redirect_to :action => 'icalendar_generator'
